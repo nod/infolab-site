@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>Infolab: Web & Distributed Information Management | Texas A&M University
+{% block title %}{% endblock %}</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="/static/global.css"/>
+</head>
+<body>
+<div id="container">
+	<div id="headerContainer">
+	<div id="headerMain"><h1><a href="/">Infolab: Web & Distributed Information Management</a></h1></div>
+	<div id="headerright">
+		<h1><a href="http://tamu.edu/">Texas A&M University</a></h1>
+        </div>
+	</div>
+ 
+<!-- start nav -->
+	<span class="preload1"></span>
+	<span class="preload2"></span>
+ 	<ul id="nav">
+<li {% if not section %}
+    {% if not request.META.PATH_INFO %}
+        id="on"
+    {% endif %}
+    {% endif %} class="top"><a href="/" class="top_link"><span>HOME</span></a></li>
+<li
+    {% ifequal section "people" %} id="on"{% endifequal %}
+    {% ifequal request.META.PATH_INFO|slice:"1:7" "people" %} id="on"{% endifequal %}
+    class="top"><a href="/people" class="top_link"><span>PEOPLE</span></a></li>
+<li
+    {% ifequal request.META.PATH_INFO|slice:"1:9" "projects" %} id="on"{% endifequal %}
+    class="top"><a href="/projects" class="top_link"><span>PROJECTS</span></a></li>
+<li
+    {% ifequal section "pub" %} id="on"{% endifequal %}
+    class="top"><a href="/pub" class="top_link"><span>PUBLICATIONS</span></a></li>
+<li
+    {% ifequal request.META.PATH_INFO|slice:"1:10" "resources" %} id="on"{% endifequal %}
+    class="top"><a href="/resources" class="top_link"><span>RESOURCES</span></a></li>
+	</ul>
+<!-- end nav -->
+<!--- start content -->
+	<div id="contentWrapper">
+		<div id="content">
+
+{% block content_title %}{% endblock %}
+{% block content %}
+<div id="left">{% block left-content %}{% endblock %}</div>
+<div id="right"><div id="righttop"></div><div id="rightcontent">{% block right-content %}{% endblock %}</div><div id="rightbottom"></div></div>
+{% endblock %}
+		</div>
+		<div class="push">{% block side-content %}{% endblock %}</div>
+	</div>
+</div>
+	<div id="footer">
+		<div id="footerInner">
+infolab,
+        301 Harvey R. Bright Bldg, 3112 TAMU, College Station, TX 77843-3112&nbsp;
+         | &copy 2009 TAMU, All Rights Reserved.
+        <br>
+        <a href="http://www.cse.tamu.edu">Department of Computer Science and Engineering</a> 
+        | <a href="http://aggieengineer.tamu.edu/">Dwight Look College of Engineering</a> 
+        | <a href="http://www.tamu.edu">Texas A&amp;M University</a></small> <br/>
+        Privacy statement: <a href="http://www.cse.tamu.edu/department/policies/privacy">Computer Science and Engineering</a> <a href="http://engineer.tamu.edu/policies/#privacy">Engineering</a> <a href="http://www.tamu.edu/home/statements/privacy.html">TAMU</A> 
+		</div>
+
+        </div>
+</body>
+</html>

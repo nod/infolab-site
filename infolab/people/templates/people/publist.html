@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="featureHeader">Lab Publications</h1>
+
+{% for p in pubs %}
+<div class="paper">
+        <a href="{{ p.pdf.url }}"><img src="/static/images/pdf_icon.jpg"/></a>
+        <h2>{{ p.title }}</h2>
+        <div class="details"> {{p.details}} </div>
+        <div class="abstract"> {{p.abstract}} </div>
+</div>
+{% endfor %}
+
+{% endblock %}

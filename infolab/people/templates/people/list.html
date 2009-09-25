@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="featureHeader">Lab Members</h1>
+
+<div class="people-list">
+    <h2>Faculty</h2>
+  <ul class="people-ul" >
+    {% for p in faculty %}
+     <li> <img src="/static/{{p.face}}" height="24"/>
+<a href="/people/{{p.username}}">{{p.first_name}} {{p.last_name}}</a>
+ {{p.title}}
+     </li>
+    {% endfor %}
+   </ul>
+</div>
+
+<div class="people-list">
+<h2>PhD Students</h2>
+  <ul >
+    {% for p in phds %}
+     <li> <img src="/static/{{p.face}}" height="24"/>
+<a href="/people/{{p.username}}">{{p.first_name}} {{p.last_name}}</a>
+ {{p.title}}
+     </li>
+    {% endfor %}
+   </ul>
+</div>
+
+<div class="people-list">
+<h2>Masters</h2>
+  <ul class="square">
+    {% for p in masters %}
+     <li> <img src="/static/{{p.face}}" height="24"/>
+<a href="/people/{{p.username}}">{{p.first_name}} {{p.last_name}}</a>
+ {{p.title}}
+     </li>
+    {% endfor %}
+   </ul>
+</div>
+
+{% endblock %}

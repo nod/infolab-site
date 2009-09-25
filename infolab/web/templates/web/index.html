@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block left-content %}
+  <div class="post-list">
+  <h1 class="featureHeader">Latest News</h1>
+    {% for post in posts %}
+    <div class="post-item">
+      <h3 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+      <div class="meta">posted {{ post.publish|timesince }} ago by <a href="/people/{{ post.author }}">{{post.author.first_name}}</a></div>
+      <p class="tease">{% if post.tease %}
+{{ post.tease }}
+{% else %}
+{{ post.body|slice:":360" }}{% if post.body|slice:"361:" %}... <a href="{{ post.get_absolute_url }}">[read more]</a>{% endif %}
+{% endif %}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if is_paginated %}
+  <p class="pagination">
+    {% if has_next %}
+    <a class="older" href="?page={{ next }}">Older</a>
+    {% endif %}
+    {% if has_next and has_previous %} | {% endif %}
+    {% if has_previous %}
+    <a class="newer" href="?page={{ previous }}">Newer</a>
+    {% endif %}
+  </p>
+  {% endif %}
+
+{% endblock %}
+
+{% block right-content %}
+        <h3>The Lab on Twitter</h3>
+            <div id="twitter_update_list"></div>
+            <a href="http://twitter.com/infolabtamu" id="twitter-link" style="display:block; test-align:right;">follow us on Twitter</a>
+            <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+            <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/infolabtamu.json?callback=twitterCallback2&amp;count=5"></script>
+{% endblock %}
