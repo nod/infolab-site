@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head-extra %}
+<script src="http://www.google.com/jsapi"></script>
+<script>
+  // Load jQuery
+  google.load("jquery", "1");
+</script>
+<script language="javascript" type="text/javascript" src="/static/flot/jquery.flot.pack.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>chart for {{ statkey }}</h1>
+
+<div id="placeholder" style="width:600px;height:300px;"></div>
+
+
+{% for t in toptw %}
+<script language="javascript" type="text/javascript" src="/projects/twdata/{{t.1}}/"></script>
+{% endfor %}
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+    $.plot($("#placeholder"), 
+        [
+       {% for t in toptw %}{data: d_{{t.1}}, label: "{{t.0}}"}{% if not forloop.last %},{% endif %}
+       {% endfor %} 
+         ], {
+        xaxis: { mode: "time" } ,
+        legend: { position: 'nw' },
+        lines: { show: true },
+        });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="featureHeader">flag for {{ flag.flag_name }}</h1>
+
+<h2>
+last updated: {{ flag.last_updated }}
+</h2>
+
+<img src="/static/images/flag_{{flag.status}}.png"/>
+
+
+{% if flag.stat_text %}
+<div style="width:400px; border: 1px dotted #035c86; ">
+<h2>status text</h2>
+{{ flag.stat_text }}
+</div>
+{% endif %}
+
+
+{% endblock %}

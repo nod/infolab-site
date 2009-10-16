@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head-extra %}
+<script src="http://www.google.com/jsapi"></script>
+<script>
+  // Load jQuery
+  google.load("jquery", "1");
+</script>
+<script language="javascript" type="text/javascript" src="/static/flot/jquery.flot.pack.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h1>raw popularity for {{name}}</h1>
+
+<div id="placeholder" style="width:600px;height:300px;"></div>
+
+<script language="javascript" type="text/javascript" src="/projects/twdata/{{twnum}}/"></script>
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+    var d1 = d_{{twnum}}; // comes from js include above
+    $.plot($("#placeholder"), 
+        [ {data: d1, color: "#075f87", label: "{{twnum}}"}], {
+        xaxis: { mode: "time" } ,
+        legend: { position: 'sw' },
+        lines: { show: true },
+        });
+});
+</script>
+{% endblock %}

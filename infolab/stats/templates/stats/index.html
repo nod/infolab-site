@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head-extra %}
+<script src="http://www.google.com/jsapi"></script>
+<script>
+  // Load jQuery
+  google.load("jquery", "1");
+</script>
+<script language="javascript" type="text/javascript" src="/static/flot/jquery.flot.pack.js"></script>
+{% endblock %}
+
+{% block left-content %}
+
+<h1 class="featureHeader">Latest Stats</h1>
+
+{% for statkey in statkeys %}
+<h2 class="subHeader">{{statkey}}</h2>
+<div id="placeholder_{{statkey}}" style="width:600px;height:300px;"></div>
+<script language="javascript" type="text/javascript" src="/stats/data/{{statkey}}/"></script>
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+    $.plot($("#placeholder_{{statkey}}"),
+        [ {lines: {show: true, fill: true}, data: {{statkey}}, color: "#075f87", label: "{{statkey}}"}], {
+        xaxis: { mode: "time" } ,
+        legend: { position: 'nw' },
+        lines: { show: true },
+        });
+});
+</script>
+{% endfor %}
+
+{% endblock %}
+
+{% block right-content %}
+<h1 class="featureHeader">Latest Flagged Jobs</h1>
+
+{% for flag in flags %}
+    <table >
+    <tr><td>
+    <img align=left  style="width:60px;" src="/static/images/flag_{{flag.status}}.png"/>
+    </td><td style="padding:3px;">
+    <strong>flag:</strong> {{flag.flag_name}} <br/>
+    <strong>life:</strong> {{flag.last_updated|timeuntil:flag.created_at}}<br/>
+    <strong>updated:</strong> {{flag.last_updated|timesince}} ago
+    <span style="font-size:11px">({{flag.last_updated|time:"H:i"}})</span>
+    <br/>
+    {{flag.stat_text}}
+    </td></tr>
+    </table>
+{% endfor %}
+
+{% endblock %}
